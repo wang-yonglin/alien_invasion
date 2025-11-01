@@ -38,3 +38,4 @@ class Ship:
         """在指定位置绘制飞船"""
         self.screen.blit(self.image, self.rect)
 
+
