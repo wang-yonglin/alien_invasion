@@ -35,7 +35,7 @@ class AlienInvasion:
             self.clock.tick(60)
 
     def _check_events(self):
-        # 侦听键盘和鼠标事件
+        """侦听键盘和鼠标事件"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -68,6 +68,13 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
 
+    def _update_bullets(self):
+        self.bullets.update()
+        # 删除已经消失的子弹
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
     def _update_screen(self):
         # 每次循环时都重绘屏幕
         self.screen.fill(self.settings.bg_color)
@@ -79,12 +86,7 @@ class AlienInvasion:
         # 让最近绘制的屏幕可见
         pygame.display.flip()
 
-    def _update_bullets(self):
-        self.bullets.update()
-        # 删除已经消失的子弹
-        for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
+
 
 
 if __name__ == "__main__":
